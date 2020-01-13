@@ -10,11 +10,12 @@ namespace CustomWindowChromeContextMenu
     /// </summary>
     public partial class MainWindow : Window
     {
-        //window message ID for the system menu
-        private const uint WM_SYSTEMMENU = 0xa4;
+        //The WM_NCRBUTTONDOWN message is posted when the user presses the right mouse button while the cursor is within the nonclient area of a window.
+        //This message is posted to the window that contains the cursor. If a window has captured the mouse, this message is not posted.
+        private const uint WM_NCRBUTTONDOWN = 0xa4;
 
-        //window message parameter for the system menu
-        private const uint WP_SYSTEMMENU = 0x02;
+        //window message parameter for the right click
+        private const uint WP_NCRBUTTONDOWN = 0x02;
 
         public MainWindow()
         {
@@ -32,7 +33,7 @@ namespace CustomWindowChromeContextMenu
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             //Message for the System Menu
-            if ((msg == WM_SYSTEMMENU) && (wParam.ToInt32() == WP_SYSTEMMENU))
+            if ((msg == WM_NCRBUTTONDOWN) && (wParam.ToInt32() == WP_NCRBUTTONDOWN))
             {
                 //Show our context menu
                 ShowContextMenu();
